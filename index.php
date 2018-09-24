@@ -4,6 +4,7 @@
 require 'vendor/autoload.php';
 
 use Todo\models\Task;
+use Todo\TaskManager;
 use Todo\storage\MySqlDatabaseTaskStorage;
 
 
@@ -12,12 +13,8 @@ $db = new PDO('mysql:host=127.0.0.1;dbname=testdb', 'root', 'root');
 
 $storage = new MySqlDatabaseTaskStorage($db);
 
+$manager = new TaskManager($storage);
 
-$task = $storage->get(2);
+var_dump($manager->getTask(3)); 
 
-$task->setDescription('WOW');
-$task->setDue(new DateTime('+ 30 days'));
 
-var_dump($storage->update($task));
-
-// $storage->update($task);
